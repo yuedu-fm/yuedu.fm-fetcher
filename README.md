@@ -30,8 +30,8 @@ articles-n.jpg</pre>
 "api-channels":"http://7xlwed.com1.z0.glb.clouddn.com/channels",
 "api-articles":"http://7xlwed.com1.z0.glb.clouddn.com/articles-",
 "api-suffix":".jpg"
-}
-</pre>
+}</pre>
+
 * channels.jpg对应yuedu.fm网站的频道信息
 <pre>
 {
@@ -61,8 +61,8 @@ articles-n.jpg</pre>
             "name": "Labs"
         }
     ]
-}
-</pre>
+}</pre>
+
 * articles-x.jpg包含文章信息，包含如下内容:
 <pre>
 {
@@ -77,8 +77,7 @@ articles-n.jpg</pre>
     "play-count": 6979,
     "picture": "http://yuedu.fm/static/file/large/d9239f8f1141ccb2d5cd9c3cbe3640f2",
     "audio": "http://yuedu.fm/static/file/pod/daa1915c50d3b23439cdcb7d8ae4c231.mp3"
-}
-</pre>
+}</pre>
 
 ### 版权声明
 所获取到的文章信息和频道内容版权归悦读FM（yuedu.fm）所有，请使用者遵循悦读FM（yuedu.fm）版权明细.
