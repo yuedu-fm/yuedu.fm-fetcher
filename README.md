@@ -5,7 +5,7 @@
 
 ### 使用说明
 在MacOSX命令行执行如下命令
-<pre>
+	<pre>
 git clone https://github.com/yuedu-fm/yuedu.fm-fetcher
 cd yuedu.fm-fetcher
 chmod 777 yuedu.fm-fetcher
@@ -13,7 +13,7 @@ chmod 777 yuedu.fm-fetcher
 
 ### 输出
 在output目录下会输出悦读FM客户端所需的所有信息，主要包括:
-<pre>
+	<pre>
 config.jpg
 channels.jpg
 articles-0.jpg
