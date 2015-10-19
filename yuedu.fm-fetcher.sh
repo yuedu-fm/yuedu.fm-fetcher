@@ -177,6 +177,11 @@ fetch_articles() {
     done
     json_array_footer $json_file
 
+    if [ "$begin_id" != "0" ];then
+        ((begin_id--))
+    fi
+    echo ",\"next\":$begin_id" >> $json_file
+
     json_footer $json_file
 }
 
@@ -204,8 +209,9 @@ fetch_all_articles() {
         fi
 
         # 只更新最新section及未下载的section
-        if [[ "$i" == "$max_section" || ! -f "$json_file" ]];then
-            fetch_articles $begin_id $end_id "$json_file$i$suffix"
+        local file="$json_file$i$suffix"
+        if [[ "$i" == "$max_section" || ! -f "$file" ]];then
+            fetch_articles $begin_id $end_id $file
         fi
     done
 
