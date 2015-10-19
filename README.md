@@ -63,7 +63,7 @@ articles-n.jpg</pre>
     ]
 }</pre>
 
-* articles-x.jpg包含文章信息，包含如下内容:
+* articles-x.jpg包含文章信息，文章信息包含如下字段:
 <pre>
 {
     "id": 1,
