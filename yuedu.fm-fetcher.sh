@@ -274,6 +274,10 @@ fetch_config() {
     json_footer $json_file
 }
 
+# Check qrsync
+command -v qrsync >/dev/null 2>&1 || { error >&2 "The qrsync is not installed. Please goto qiniu website(http://developer.qiniu.com/docs/v6/tools/qrsync.html) to get it."; exit -1; }
+
+
 spushd `current_dir`
 
 mkdir -p output
