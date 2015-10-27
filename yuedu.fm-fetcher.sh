@@ -258,25 +258,6 @@ fetch_channels() {
     json_footer $json_file
 }
 
-mkdir -p output
-spushd output
-
-# 配置信息
-section=20
-
-# 由于七牛服务器只运行上传媒体文件，因此伪装成.jpg
-suffix=".jpg"
-config_json="config$suffix"
-articles_json="articles-"
-channels_json="channels"
-qndomain="http://7xlwed.com1.z0.glb.clouddn.com"
-touch $config_json
-old_latest_article_id=`awk -F "[:,]" '/latest-article-id/{print $2}' $config_json`
-if [ "$old_latest_article_id" == "" ];then
-    old_latest_article_id=0
-fi
-latest_article_id=`fetch_latest_article_id`
-
 # 配置
 # @param json_file
 fetch_config() {
@@ -293,16 +274,45 @@ fetch_config() {
     json_footer $json_file
 }
 
-info "latest: $latest_article_id"
+spushd `current_dir`
+
+mkdir -p output
+
+spushd output
+
+# 配置信息
+section=20
+
+# 由于七牛服务器只运行上传媒体文件，因此伪装成.jpg
+suffix=".jpg"
+config_json="config$suffix"
+articles_json="articles-"
+channels_json="channels"
+qndomain="http://7xlwed.com1.z0.glb.clouddn.com"
+touch $config_json
+
+info "正在检查是否有新文章..."
+old_latest_article_id=`awk -F "[:,]" '/latest-article-id/{print $2}' $config_json`
+if [ "$old_latest_article_id" == "" ];then
+    old_latest_article_id=0
+fi
+latest_article_id=`fetch_latest_article_id`
+
 if [ "$old_latest_article_id" -ge "$latest_article_id" ];then
-    info 'Nothing need update ... '
+    info '暂时没有新文章，已退出.'
     exit 0
 fi
 
+info "获取新文章信息..."
 fetch_channels $channels_json $suffix
 fetch_all_articles $latest_article_id $section $articles_json $suffix
-
 fetch_config $config_json 
 
+spopd
+
+info "同步到云端..."
+qrsync ./yuedu.fm-syn.conf
+
+info "同步完成."
 spopd
 

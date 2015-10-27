@@ -2,8 +2,9 @@
 
 该脚本用于获取yuedu.fm文章信息、频道信息、悦读FM客户端所需的配置信息.
 
-
 ### 使用说明
+在使用该脚本之前，请确保已下载七牛同步工具[qrsync](http://developer.qiniu.com/docs/v6/tools/qrsync.html)
+
 在MacOSX命令行执行如下命令
 	<pre>
 git clone https://github.com/yuedu-fm/yuedu.fm-fetcher
