@@ -53,9 +53,13 @@ current_dir() {
 usage() {
 cat << EOF
 
-USAGE: $0 
+USAGE: $0 [<qrsync command path>]
 
 DESCRIPTION:
+<qrsync command path> qrsync command's path(must be set if under cron)
+
+EXAMPLE:
+$0 /usr/local/bin/qrsync
 
 EOF
 }
@@ -275,8 +279,20 @@ fetch_config() {
 }
 
 # Check qrsync
-command -v qrsync >/dev/null 2>&1 || { error >&2 "The qrsync is not installed. Please goto qiniu website(http://developer.qiniu.com/docs/v6/tools/qrsync.html) to get it."; exit -1; }
+if [ "$#" -ge 1 ];then
+    qrsync=$1
+fi
 
+if [ "$qrsync" == "" ];then
+    command -v qrsync >/dev/null 2>&1 || { error >&2 "The qrsync is not installed. Please goto qiniu website(http://developer.qiniu.com/docs/v6/tools/qrsync.html) to get it."; exit -1; }
+else
+    if [ -f "$qrsync" ];then
+        qrsync=qrsync
+    else
+        error "File $qrsync does not exist."
+        exit -1
+    fi
+fi
 
 spushd `current_dir`
 
@@ -315,7 +331,7 @@ fetch_config $config_json
 spopd
 
 info "同步到云端..."
-qrsync ./yuedu.fm-syn.conf
+"$qrsync" ./yuedu.fm-syn.conf
 
 info "同步完成."
 spopd

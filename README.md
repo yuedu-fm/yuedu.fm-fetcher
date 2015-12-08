@@ -80,6 +80,12 @@ articles-n.jpg</pre>
     "audio": "http://yuedu.fm/static/file/pod/daa1915c50d3b23439cdcb7d8ae4c231.mp3"
 }</pre>
 
+### crontab
+考虑到crontab缺少相关环境变量，不一定能够找到qrsync命令，因此请添加qrsync路径参数
+<pre>
+yuedu.fm-fetcher.sh /usr/local/bin/qrsync
+</pre>
+
 ### 版权声明
 所获取到的文章信息和频道内容版权归悦读FM（yuedu.fm）所有，请使用者遵循悦读FM（yuedu.fm）版权明细.
 
