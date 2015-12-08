@@ -285,10 +285,9 @@ fi
 
 if [ "$qrsync" == "" ];then
     command -v qrsync >/dev/null 2>&1 || { error >&2 "The qrsync is not installed. Please goto qiniu website(http://developer.qiniu.com/docs/v6/tools/qrsync.html) to get it."; exit -1; }
+    qrsync=qrsync
 else
-    if [ -f "$qrsync" ];then
-        qrsync=qrsync
-    else
+    if [ ! -f "$qrsync" ];then
         error "File $qrsync does not exist."
         exit -1
     fi
@@ -331,7 +330,8 @@ fetch_config $config_json
 spopd
 
 info "同步到云端..."
-"$qrsync" ./yuedu.fm-syn.conf
+
+`"$qrsync" yuedu.fm-syn.conf`
 
 info "同步完成."
 spopd
