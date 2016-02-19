@@ -273,7 +273,7 @@ fetch_config() {
     echo "\"latest-article-id\":$latest_article_id," >> $json_file
     echo "\"api-channels\":\"$qndomain/$channels_json\"," >> $json_file
     echo "\"api-articles\":\"$qndomain/$articles_json\"," >> $json_file
-    echo "\"api-suffix\":\"$suffix\"" >> $json_file
+    echo "\"api-suffix\":\"$suffix\"," >> $json_file
     # 由于苹果审核要求需要授权才可以下载，因此在新版本升级时必须关闭下载功能，以保证审核通过
     echo "\"allow-download\":0" >> $json_file
 
