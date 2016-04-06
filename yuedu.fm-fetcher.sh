@@ -140,6 +140,9 @@ fetch_article() {
     duration=`time_string_to_seconds "$duration"`
     json="$json\"duration\":$duration,"
     count=`awk_trim '[\<\>]'  '/class="fr">播放/{print $5}' $tmp_file`
+    if [ -z "$count" ];then
+        count=0
+    fi
     json="$json\"play-count\":$count,"
 
     picture=`sed -n '/div class="item-pic">/,/>/p' $tmp_file|awk_trim "[=\"]" '/img/{print $3}'`
