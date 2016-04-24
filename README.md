@@ -9,8 +9,8 @@
 	<pre>
 git clone https://github.com/yuedu-fm/yuedu.fm-fetcher
 cd yuedu.fm-fetcher
-chmod 777 yuedu.fm-fetcher
-./yuedu.fm-fetcher</pre>
+chmod 777 yuedu.fm-fetcher.sh
+./yuedu.fm-fetcher.sh</pre>
 
 ### 输出
 在output目录下会输出悦读FM客户端所需的所有信息，主要包括:
