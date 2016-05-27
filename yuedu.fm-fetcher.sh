@@ -68,18 +68,22 @@ base_url="http://yuedu.fm"
 
 json_header() {
     echo "{" > $1
+    sync
 }
 
 json_footer() {
     echo "}" >> $1
+    sync
 }
 
 json_array_header() {
     echo "[" >> $1
+    sync
 }
 
 json_array_footer() {
     echo "]" >> $1
+    sync
 }
 
 trim() {
@@ -169,6 +173,8 @@ fetch_articles() {
     json_header $json_file
 
     echo "\"list\":" >> $json_file
+    sync
+
     json_array_header $json_file
 
     local i
@@ -176,11 +182,13 @@ fetch_articles() {
     do
         if [ "$article" != "" ];then
             echo "," >> $json_file
+            sync
         fi
 
         info "Fetching article $i ..."
         article=`fetch_article $i`
         echo $article >> $json_file
+        sync
     done
     json_array_footer $json_file
 
@@ -188,6 +196,7 @@ fetch_articles() {
         ((begin_id--))
     fi
     echo ",\"next\":$begin_id" >> $json_file
+    sync
 
     json_footer $json_file
 }
@@ -236,6 +245,7 @@ fetch_channels() {
     json_header $json_file
 
     echo "\"list\":" >> $json_file
+    sync
     json_array_header $json_file
 
     # 获取所有频道  格式: 1 悦读 2 情感 3 连播 4 校园 5 音乐 6 Labs
@@ -260,8 +270,10 @@ fetch_channels() {
     rm $tmp_file
 
     echo $json >> $json_file
+    sync
 
     json_array_footer $json_file
+
     json_footer $json_file
 }
 
@@ -270,6 +282,7 @@ fetch_channels() {
 fetch_config() {
     local json_file=$1
     json_header $json_file
+    sync
 
     echo "\"base-url\":\"$qndomain\"," >> $json_file
     echo "\"section\":$section," >> $json_file
@@ -279,6 +292,7 @@ fetch_config() {
     echo "\"api-suffix\":\"$suffix\"," >> $json_file
     # 由于苹果审核要求需要授权才可以下载，因此在新版本升级时必须关闭下载功能，以保证审核通过
     echo "\"allow-download\":0" >> $json_file
+    sync
 
     json_footer $json_file
 }
